@@ -1,12 +1,16 @@
-from flask import Flask
+from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from flask import Flask, render_template
+from datetime import datetime
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+moment = Moment(app)
 
-# Example 2-1
 @app.route('/')
 def index():
-	return '<h1>Hello World!</h1>'
+	return render_template('index.html', curr_time=datetime.utcnow())
 
-# Example 2-2
+# activity 3
 @app.route('/user/<name>')
 def user(name):
-	return '<h1>Hello, {}!</h1>'.format(name)
+	return render_template('user.html', name=name, curr_time=datetime.utcnow())
